@@ -8,6 +8,7 @@ import javax.persistence.Column;
 //import javax.persistence.DiscriminatorColumn;
 //import javax.persistence.DiscriminatorType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -37,7 +38,7 @@ public abstract class Machine {
 	private BigDecimal price;
 	
 	
-	@OneToMany(mappedBy = "machine",cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToMany(mappedBy = "machine",cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
 	private List<MachineVoltage> voltages;
 
 	
@@ -119,6 +120,8 @@ public abstract class Machine {
 	public String toString() {
 		return "Machine [id=" + id + ", type=" + type + ", price=" + price + ", voltages=" + voltages + "]";
 	}
+
+	
 	
 	
 	

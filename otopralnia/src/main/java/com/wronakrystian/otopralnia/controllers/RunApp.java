@@ -2,6 +2,7 @@ package com.wronakrystian.otopralnia.controllers;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,12 +27,9 @@ public class RunApp {
 		super();
 		this.repository = repository;
 	}
-	
-
 	public void setRepository(MachineRepository repository) {
 		this.repository = repository;
 	}
-	
 	
 	public void run() {
 		System.out.println("RUN APP");
@@ -44,6 +42,7 @@ public class RunApp {
 		Machine m2 = new Washer("PBE-15",new BigDecimal("12500"),"45");
 		Machine m3 = new WasherExtractor("RX105",new BigDecimal("16500.00"),"760");
 		Machine m4 = new WasherExtractor("RX135",new BigDecimal("23000.00"),"760");
+		Machine m5 = new Washer("PBE-08",new BigDecimal("10000.00"),"50");
 	
 		
 		MachineVoltage machineVoltage1 = new MachineVoltage();
@@ -86,12 +85,31 @@ public class RunApp {
 		repository.save(m2);
 		repository.save(m3);
 		repository.save(m4);
+		repository.save(m5);
 		
 		System.out.println("MACHINES ==================================");
 		System.out.println(m1);
 		System.out.println(m2);
 		System.out.println(m3);
 		System.out.println(m4);
+		
+		List<Machine> machines = repository.findByType("PBE-08");
+		machines.forEach(System.out::println);
+		
+		Iterator<Machine> it = machines.iterator();
+		while(it.hasNext()) {
+			Machine m = it.next();
+			System.out.println(m);
+		}
+		
+		Iterable<Machine> machinesByPrices = repository.findByPrice(new BigDecimal("12500"));
+		Iterator<Machine> it2 = machinesByPrices.iterator();
+		System.out.println("BY PRICE ======= ");
+		while(it2.hasNext()) {
+			System.out.println(it2.next());
+		}
+	
+		
 		
 		
 	}

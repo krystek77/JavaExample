@@ -32,10 +32,10 @@ public class Washer extends Machine {
 
 	@Override
 	public String toString() {
-		return "Washer [washingSpeed=" + washingSpeed + ", getId()=" + getId() + ", getType()=" + getType()
-				+ ", getPrice()=" + getPrice() + ", getVoltages()=" + getVoltages() + ", hashCode()=" + hashCode()
-				+ ", getClass()=" + getClass() + "]";
+		return "Washer [washingSpeed=" + washingSpeed + ", toString()=" + super.toString() + "]";
 	}
+
+	
 
 	
 	
